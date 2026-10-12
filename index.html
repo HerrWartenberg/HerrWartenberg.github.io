@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+  Übersicht der digitalen Escape Rooms und Lernspiele – Herr Wartenberg, Flora-Realschule Düsseldorf
+  Keine externen Ressourcen, keine Cookies, kein Tracking.
+  KI-Hinweis: erstellt mit Claude Opus 5.5 (Anthropic PBC), 12.10.2026.
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>Escape Rooms – Herr Wartenberg</title>
+<style>
+:root{--paper:#f3ecdf;--card:#fffdf8;--ink:#2a2420;--ink2:#4a413a;--muted:#73685c;--line:#ddd0b9;--line2:#c9b899;--rust:#b0502b;--sage:#45663f;--ocean:#2e6a88;--ocean2:#1f4f68;--ocher:#c48a1f}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.55}
+body{background-image:linear-gradient(rgba(140,112,72,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(140,112,72,.10) 1px,transparent 1px);background-size:64px 64px;min-height:100vh}
+.wrap{max-width:1040px;margin:0 auto;padding:48px 20px 40px}
+header{display:flex;gap:18px;align-items:center;margin-bottom:34px}
+header svg{flex:0 0 auto}
+.kicker{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:600}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,4.5vw,46px);line-height:1.08;margin:4px 0 6px}
+h1 em{color:var(--rust)}
+.lead{color:var(--ink2);margin:0;max-width:680px}
+h2{font-family:Georgia,serif;font-size:24px;margin:34px 0 14px;color:var(--ocean2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+a.card{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:20px;box-shadow:0 8px 18px -14px rgba(80,55,20,.5);position:relative;transition:transform .15s ease,box-shadow .15s ease}
+a.card:hover,a.card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 26px -14px rgba(80,55,20,.6)}
+a.card:focus-visible{outline:3px solid var(--ocean);outline-offset:3px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:4px;border:1px solid var(--line2);color:var(--ink2);background:#f8f2e6}
+.tag.k{border-color:var(--rust);color:var(--rust);background:#f8e6db}
+.card h3{font-family:Georgia,serif;font-size:21px;margin:4px 0 0;line-height:1.2}
+.card p{margin:0;color:var(--ink2);font-size:15px}
+.go{margin-top:auto;padding-top:8px;font-weight:700;color:var(--ocean2);font-size:15px}
+.go::after{content:" →"}
+.note{margin-top:40px;background:var(--card);border:1px dashed var(--line2);border-radius:10px;padding:16px 18px;font-size:14px;color:var(--muted)}
+.note b{color:var(--ink2)}
+footer{margin-top:24px;font-size:12px;color:var(--muted);text-align:center}
+@media (prefers-reduced-motion:reduce){a.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <svg width="64" height="64" viewBox="0 0 46 46" aria-hidden="true">
+      <circle cx="23" cy="23" r="20" fill="#fffdf8" stroke="#b0502b" stroke-width="1.5"/>
+      <circle cx="23" cy="23" r="15.5" fill="none" stroke="#c9b899" stroke-width=".8"/>
+      <path d="M23 3 L26 20 L43 23 L26 26 L23 43 L20 26 L3 23 L20 20 Z" fill="#2e6a88"/>
+      <path d="M23 3 L26 20 L23 23 Z M43 23 L26 26 L23 23 Z M23 43 L20 26 L23 23 Z M3 23 L20 20 L23 23 Z" fill="#1f4f68"/>
+      <circle cx="23" cy="23" r="2.2" fill="#fffdf8" stroke="#2a2420" stroke-width=".8"/>
+    </svg>
+    <div>
+      <div class="kicker">Erdkunde · Flora-Realschule Düsseldorf</div>
+      <h1>Digitale <em>Escape Rooms</em></h1>
+      <p class="lead">Lernspiele für den Unterricht bei Herrn Wartenberg. Wählt den Raum, den euch eure Lehrkraft nennt – und haltet Buch, Papier und Stift bereit.</p>
+    </div>
+  </header>
+
+  <h2>Escape Rooms</h2>
+  <div class="grid">
+    <a class="card" href="weltbevoelkerung10/">
+      <div class="tags"><span class="tag k">Klasse 10</span><span class="tag">Weltbevölkerung</span></div>
+      <h3>ORBIS – Operation Weltatlas</h3>
+      <p>Restauriert sechs Kartenblätter des Bevölkerungsatlas 2100: Wachstum, demografischer Übergang, Prognosen, Altersstruktur und Tragfähigkeit.</p>
+      <span class="go">Raum öffnen</span>
+    </a>
+    <a class="card" href="escapeglobal/">
+      <div class="tags"><span class="tag k">Klasse 10</span><span class="tag">Globalisierung</span></div>
+      <h3>GLOBAL WATCH – Die verschwundene Lieferung</h3>
+      <p>Verfolgt eine verschwundene Lieferung durch globale Lieferketten und löst fünf Rätsel aus den Akten.</p>
+      <span class="go">Raum öffnen</span>
+    </a>
+    <a class="card" href="klimawandel8/">
+      <div class="tags"><span class="tag k">Klasse 8</span><span class="tag">Klimawandel</span></div>
+      <h3>Operation Klimaarchiv</h3>
+      <p>Rettet auf der antarktischen Forschungsstation Helheim-7 das Klimaarchiv, bevor der Polarsturm kommt.</p>
+      <span class="go">Raum öffnen</span>
+    </a>
+  </div>
+
+  <h2>Weitere Lernspiele</h2>
+  <div class="grid">
+    <a class="card" href="planeten-lernspiel/">
+      <div class="tags"><span class="tag">Sonnensystem</span></div>
+      <h3>Planeten-Lernspiel</h3>
+      <p>Die acht Planeten und ihre Reihenfolge – mit Lernmodus und Testmodus.</p>
+      <span class="go">Spiel öffnen</span>
+    </a>
+  </div>
+
+  <div class="note">
+    <b>Datenschutz:</b> Die Spiele laden keine externen Inhalte, setzen keine Cookies und speichern keine Daten. Die Seiten werden über GitHub Pages bereitgestellt; dabei verarbeitet GitHub technisch bedingt Verbindungsdaten (z. B. IP-Adressen). Bitte im Spiel keine echten Namen als Teamnamen verwenden.<br>
+    <b>Urheberrecht:</b> Die Rätsel verweisen nur auf Seiten der eingeführten Schulbücher; Buchinhalte sind nicht enthalten. Schriften unter SIL Open Font License.<br>
+    <b>KI-Hinweis:</b> Die Lernspiele wurden mit Unterstützung von KI (Claude, Anthropic) erstellt und von der Lehrkraft fachlich geprüft.
+  </div>
+  <footer>Herr Wartenberg · Erdkunde · Flora-Realschule Düsseldorf</footer>
+</div>
+</body>
+</html>
