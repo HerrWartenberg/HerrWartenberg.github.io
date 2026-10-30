@@ -175,8 +175,14 @@ details.lic{font-size:13px;color:var(--muted)}details.lic summary{cursor:pointer
         <div class="chips" id="extras"></div>
         <div class="row" style="margin-top:12px">
           <label class="f">Idee fürs Easter Egg <span class="h">optional</span><input type="text" id="eggIdee" placeholder="z. B. geheimer Partyraum hinter dem Kaffeeautomaten"></label>
-          <label class="f">Format der Lehrerhandreichung<select id="handFormat"><option value="docx">Word (.docx)</option><option value="pdf">PDF</option><option value="beides">Word und PDF</option></select></label>
           <label class="f">Geheimer Teamname für Lehrkräfte <span class="h">wird im Spiel nur als Prüfsumme gespeichert</span><input type="text" id="cheat" placeholder="z. B. Zauberkeks"></label>
+        </div>
+      </fieldset>
+
+      <fieldset id="handBox" hidden>
+        <legend><span class="n">07</span>Lehrerhandreichung</legend>
+        <div class="row">
+          <label class="f">Format der Lehrerhandreichung<select id="handFormat"><option value="docx">Word (.docx)</option><option value="pdf">PDF</option><option value="beides">Word und PDF</option></select></label>
         </div>
       </fieldset>
     </form>
@@ -475,6 +481,7 @@ function musikZeile(L) {
 function update() {
   const art = (document.querySelector("input[name=art]:checked") || {}).value || "";
   $("#artBox").classList.toggle("need", !art);
+  $("#handBox").hidden = !has("hand");
   const t = build(); $("#prompt").textContent = t;
   const words = t.split(/\s+/).filter(Boolean).length;
   $("#stats").innerHTML = `<span>${words} Wörter</span><span>${art === "3d" ? "3D" : art === "2d" ? "2D" : "Art fehlt"}</span><span>${files.length} Datei${files.length === 1 ? "" : "en"}</span><span>${val("raeume") === "auto" ? "Räume automatisch" : val("raeume") + " Räume"}</span>`;
