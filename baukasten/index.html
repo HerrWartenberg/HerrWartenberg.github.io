@@ -399,7 +399,8 @@ function build() {
   L.push("- **Lizenzen:** Schriften nur unter SIL OFL 1.1, als Base64 eingebettet, mit Copyright und Lizenztext im Lizenzdialog; " + (D3 ? "Bibliotheken mit vollständigem Lizenztext (z. B. three.js, MIT)." : "keine externen Bibliotheken nötig (reines HTML/CSS/JavaScript).") + "");
   if (val("musik") === "frei") L.push("- **Musik/Geräusche** nur unter CC0 oder CC BY, mit Namensnennung (Titel, Urheber, Quelle, Lizenz) im Lizenzdialog.");
   if (D3) L.push("- **3D-Modelle** ausschließlich mit freier Lizenz (z. B. NVIDIA SimReady Assets, CC BY 4.0) und vollständiger Namensnennung inkl. Änderungshinweis und Modellliste.");
-  L.push("- **KI-Kennzeichnung** im Spiel (Modell, Anbieter, Datum) und in der Handreichung.", "");
+  L.push("- **KI-Kennzeichnung** im Spiel (Modell, Anbieter, Datum) und in der Handreichung.");
+  L.push("- **Pflichtvermerk (wörtlich übernehmen):** „Erstellt mit Unterstützung von KI (Claude, Anthropic) und dem Escape-Room-Baukasten von Philipp Wartenberg (@herrwartenberg).“ Dieser Satz steht in **jedem** Escape Room sichtbar (Startbildschirm oder Fußzeile **und** im Dialog „Hinweise & Lizenzen“, zusätzlich im Kommentar am Dateianfang) und in der **Lehrerhandreichung** (Titelseite und Kapitel „Rechtliche Hinweise“). Nicht kürzen, nicht umformulieren.", "");
 
   L.push("## Technik");
   if (D3) {

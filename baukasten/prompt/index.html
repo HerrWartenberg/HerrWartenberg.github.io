@@ -94,6 +94,7 @@ Frage nach, wenn Angaben fehlen. Sonst triff begründete Standardentscheidungen 
 - **Keine Nachbauten** bekannter Spiele, Marken oder Figuren.
 - **Lizenzen:** Schriften nur unter SIL OFL 1.1, als Base64 eingebettet, mit Copyright und Lizenztext im Lizenzdialog. Bibliotheken mit vollständigem Lizenztext (z. B. three.js, MIT). 3D-Modelle nur mit freier Lizenz (z. B. CC BY 4.0) und vollständiger Namensnennung inkl. Änderungshinweis und Modellliste.
 - **KI-Kennzeichnung** im Spiel (Modell, Anbieter, Datum) und in der Handreichung.
+- **Pflichtvermerk (wörtlich übernehmen):** „Erstellt mit Unterstützung von KI (Claude, Anthropic) und dem Escape-Room-Baukasten von Philipp Wartenberg (@herrwartenberg).“ Dieser Satz steht in **jedem** Escape Room sichtbar (Startbildschirm oder Fußzeile **und** im Dialog „Hinweise &amp; Lizenzen“, zusätzlich im Kommentar am Dateianfang) und in der **Lehrerhandreichung** (Titelseite und Kapitel „Rechtliche Hinweise“). Nicht kürzen, nicht umformulieren.
 
 ## Technik
 - Eine HTML-Datei, offline lauffähig, möglichst unter 2 MB. 3D mit **three.js** (feste Version), mit **esbuild** gebündelt und eingebettet. Quellcode modular (Welt/Steuerung, Gebäude, Räume, Rätsel, Texturen). Ein Build-Skript erzeugt `index.html` und eine Testversion mit Debug-Zugang.
