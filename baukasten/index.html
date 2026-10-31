@@ -102,11 +102,16 @@ details.lic{font-size:13px;color:var(--muted)}details.lic summary{cursor:pointer
         <legend><span class="n">00</span>Art des Escape Rooms</legend>
         <div class="modes" role="radiogroup" aria-label="Art des Escape Rooms">
           <label class="mode"><span class="t"><input type="radio" name="art" id="art2d" value="2d">Escape Room als Webseite (2D)</span>
-            <p>Räume als illustrierte Stationen mit Schlössern, Rätseln und Hinweisen. Läuft auf jedem Gerät, auch auf älteren Tablets.</p>
+            <p>Räume als Stationen mit Schlössern, Rätseln und Hinweisen – schlicht als Interface oder auf Wunsch illustriert. Läuft auf jedem Gerät, auch auf älteren Tablets.</p>
             <span class="cost">Geringer Tokenverbrauch · meist in einer Sitzung fertig</span></label>
           <label class="mode"><span class="t"><input type="radio" name="art" id="art3d" value="3d">Begehbarer 3D-Escape-Room</span>
             <p>Ein Gebäude, durch das man läuft: Räume mit Möbeln, Tafeln, Bildschirmen und Tresoren, an denen die Rätsel hängen.</p>
             <span class="cost warn">⚠ Ein Vielfaches an Tokenverbrauch und deutlich längere Erstellung (mehrere Sitzungen mit Testrunden). Kann Nutzungslimits schnell ausschöpfen; braucht aktuellere Geräte.</span></label>
+        </div>
+        <div id="gestaltBox" hidden style="margin-top:12px">
+          <div class="note" style="margin-bottom:6px"><b>Gestaltung (2D)</b></div>
+          <label class="chip"><input type="checkbox" id="illu">Mit Illustrationen &amp; Animationen</label>
+          <p class="note" style="margin-top:6px">Ohne Häkchen: klares Interface aus Karten, Panels und Typografie im Stil des Settings (wie das Klimaarchiv) – schneller gebaut und gut lesbar. Mit Häkchen: jeder Raum als gezeichnete Szene mit eigenen SVG-Grafiken und kleinen Animationen (mehr Tokenverbrauch).</p>
         </div>
       </fieldset>
 
@@ -359,7 +364,7 @@ function build() {
   const raeume = val("raeume"), pro = val("proRaum"), zeit = val("zeit");
   const ort = val("ort") === "Eigener Vorschlag" ? or(val("ortEigen"), "[eigener Schauplatz]") : val("ort");
   const typen = checked("#typen"), geraete = checked("#geraete"), a11y = checked("#a11y");
-  const art = (document.querySelector("input[name=art]:checked") || {}).value || "", D3 = art === "3d";
+  const art = (document.querySelector("input[name=art]:checked") || {}).value || "", D3 = art === "3d", ILL = !D3 && $("#illu").checked;
   const L = [];
   if (!art) L.push("> [Oben zuerst die Art wählen: Webseite (2D) oder begehbarer 3D-Escape-Room]", "");
   L.push(`# Auftrag: ${D3 ? "Begehbarer 3D-Escape-Room" : "Digitaler Escape Room"} für ${fach}, Klasse ${jg}`, "");
@@ -389,7 +394,7 @@ function build() {
   L.push(`- Stimmung: ${val("ton")}`);
   L.push(`- Finale: ${val("finale") === "Automatisch passend zum Setting" ? "passend zum Setting, mit Animation" : val("finale") + " (mit Animation)"}`);
   L.push(val("story") ? `- Rahmengeschichte: ${val("story").replace(/\n+/g, " ")}` : "- Rahmengeschichte: schlage mir drei kurze Varianten vor (warum sind die Räume verschlossen, was steht auf dem Spiel?).");
-  L.push(D3 ? "- Jeder Raum hat ein Unterthema und eigene Ausstattung; die Rätsel hängen an passenden Objekten (Tafel, Bildschirm, Plakat, Tresor, Modell, Koffer …), nicht an Listen." : "- Jeder Raum ist eine eigene, illustrierte Station mit Unterthema (eigene SVG/CSS-Grafiken, passend zum Setting); die Rätsel erscheinen als Karten bzw. Objekte in dieser Szene.", "");
+  L.push(D3 ? "- Jeder Raum hat ein Unterthema und eigene Ausstattung; die Rätsel hängen an passenden Objekten (Tafel, Bildschirm, Plakat, Tresor, Modell, Koffer …), nicht an Listen." : ILL ? "- Jeder Raum ist eine eigene, illustrierte Station mit Unterthema (eigene SVG/CSS-Grafiken, passend zum Setting); die Rätsel erscheinen als Karten bzw. Objekte in dieser Szene." : "- Jeder Raum ist eine eigene Station mit Unterthema; die Rätsel erscheinen als Karten bzw. Panels in einer klar gegliederten Oberfläche, die das Setting über Farben, Schrift, Symbole und Texte trägt (keine gezeichneten Szenen).", "");
 
   L.push("## Arbeitsweise");
   L.push("1. **Erst planen, dann bauen:** Gebäudeplan, Räume mit Unterthema, Rätsel je Raum mit Materialverweis, Türcodes, Technik und alle nötigen Downloads vorstellen. Auf mein OK warten.");
@@ -426,11 +431,11 @@ function build() {
   L.push(`- Ton: ${val("tonfx")}${val("tonfx").startsWith("Signal") ? " – erzeugt per WebAudio, keine Audiodateien." : "."}`); musikZeile(L);
   L.push("- **Leistung (Pflicht, vor allem für Tablets):** höchstens ~5 echte Punktlichter (Licht-Pool übernimmt die nächstgelegenen Lampen); kein logarithmischer Tiefenpuffer; nie deckungsgleiche Flächen (≥ 6 mm Abstand, sonst Flackern); nur Räume zeichnen, in die man hineinsehen kann; unbewegliche Teile pro Material zusammenfassen; Shader und Texturen beim Start vorwärmen; Pixelratio auf Tablets ~1,4; WebGL-Kontextverlust abfangen. Ziel: unter 250 Zeichenaufrufe pro Bild, auch wenn alle Türen offen sind.", "");
   } else {
-    L.push("- Eine HTML-Datei, offline lauffähig, ohne Build-Werkzeuge: reines HTML, CSS und JavaScript. Alle Grafiken als eigenes SVG/CSS, keine Bilddateien von außen.");
+    L.push("- Eine HTML-Datei, offline lauffähig, ohne Build-Werkzeuge: reines HTML, CSS und JavaScript. " + (ILL ? "Alle Grafiken als eigenes SVG/CSS, keine Bilddateien von außen." : "Keine Bilddateien von außen; Grafik nur sparsam (Symbole, Rahmen, Fortschrittsanzeige als SVG/CSS)."));
     L.push(`- Geräte: ${geraete.join(", ") || "[Geräte]"}. Voll touchfähig (Hoch- und Querformat): Ziehen-und-Ablegen immer mit Alternative (Antippen-Zuordnen, Pfeil-Knöpfe zum Sortieren).`);
     L.push(`- Barrierefreiheit: ${a11y.join(", ") || "Grundanforderungen"}; Dialoge mit ARIA-Rollen, Fokusführung, Esc schließt.`);
     L.push(`- Ton: ${val("tonfx")}${val("tonfx").startsWith("Signal") ? " – erzeugt per WebAudio, keine Audiodateien." : "."}`); musikZeile(L);
-    L.push("- Gestaltung: eigenständiges, zum Setting passendes Design mit Fortschrittsanzeige (welche Räume offen/gelöst sind).", "");
+    L.push(ILL ? "- Gestaltung: **mit Illustrationen und Animationen** – jeder Raum als gezeichnete Szene (eigene SVG-Grafiken) mit dezenten Animationen (z. B. Licht, Bewegung, Öffnen der Tür), die „Reduzierte Bewegung“ respektieren; dazu eine Fortschrittsanzeige (welche Räume offen/gelöst sind)." : "- Gestaltung: **ohne Illustrationen** – eigenständiges, zum Setting passendes Interface-Design (z. B. Archiv-/Terminal-Oberfläche): Karten, Panels, starke Typografie, Farbakzente, Statusleisten und Symbole, sparsame Übergänge; Fortschrittsanzeige (welche Räume offen/gelöst sind).", "");
   }
   L.push("## Spielmechanik");
   L.push(D3 ? "- **Eingangsbereich:** Anmeldeterminal (Teamname → Stoppuhr startet, Tür 1 entriegelt), Pinnwand mit Geschichte und Regeln, Lageplan" + (has("resume") ? ", Kartenleser zum Fortsetzen." : ".") : "- **Startseite:** Rahmengeschichte, Regeln, Teamname (→ Stoppuhr startet, Raum 1 öffnet)" + (has("resume") ? ", Feld zum Fortsetzen." : "."));
@@ -480,9 +485,10 @@ function update() {
   const art = (document.querySelector("input[name=art]:checked") || {}).value || "";
   $("#artBox").classList.toggle("need", !art);
   $("#handBox").hidden = !has("hand");
+  $("#gestaltBox").hidden = art !== "2d";
   const t = build(); $("#prompt").textContent = t;
   const words = t.split(/\s+/).filter(Boolean).length;
-  $("#stats").innerHTML = `<span>${words} Wörter</span><span>${art === "3d" ? "3D" : art === "2d" ? "2D" : "Art fehlt"}</span><span>${files.length} Datei${files.length === 1 ? "" : "en"}</span><span>${val("raeume") === "auto" ? "Räume automatisch" : val("raeume") + " Räume"}</span>`;
+  $("#stats").innerHTML = `<span>${words} Wörter</span><span>${art === "3d" ? "3D" : art === "2d" ? ($("#illu").checked ? "2D illustriert" : "2D") : "Art fehlt"}</span><span>${files.length} Datei${files.length === 1 ? "" : "en"}</span><span>${val("raeume") === "auto" ? "Räume automatisch" : val("raeume") + " Räume"}</span>`;
 }
 function save() { const o = {}; document.querySelectorAll("#f input:not([type=file]), #f select, #f textarea").forEach(el => { if (el.id) o[el.id] = (el.type === "checkbox" || el.type === "radio") ? el.checked : el.value; }); return o; }
 function load(o) { Object.entries(o).forEach(([k, v]) => { const el = document.getElementById(k); if (!el) return; if (el.type === "checkbox" || el.type === "radio") el.checked = !!v; else if (el.tagName !== "SELECT" || [...el.options].some(op => op.value === v)) el.value = v; }); }
