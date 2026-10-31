@@ -113,7 +113,7 @@ details.lic{font-size:13px;color:var(--muted)}details.lic summary{cursor:pointer
       <fieldset>
         <legend><span class="n">01</span>Klasse &amp; Fach</legend>
         <div class="row">
-          <label class="f">Fach<input type="text" id="fach" list="fachList" placeholder="z. B. Erdkunde"><datalist id="fachList"></datalist></label>
+          <label class="f">Fach<input type="text" id="fach" placeholder="z. B. Erdkunde"></label>
           <label class="f">Jahrgangsstufe<select id="jg"></select></label>
           <label class="f">Schulform<select id="sf"></select></label>
           <label class="f">Bundesland<select id="bl"></select></label>
@@ -304,7 +304,6 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 <script>
 const $ = s => document.querySelector(s);
-const FAECHER = ["Erdkunde","Geschichte","Politik/Wirtschaft","Biologie","Chemie","Physik","Mathematik","Deutsch","Englisch","Französisch","Latein","Religion","Praktische Philosophie","Informatik","Kunst","Musik","Sport","Technik","Hauswirtschaft","Sachunterricht"];
 const SF = ["Grundschule","Hauptschule","Realschule","Sekundarschule","Gesamtschule","Gymnasium","Berufskolleg","Förderschule"];
 const BL = ["Nordrhein-Westfalen","Baden-Württemberg","Bayern","Berlin","Brandenburg","Bremen","Hamburg","Hessen","Mecklenburg-Vorpommern","Niedersachsen","Rheinland-Pfalz","Saarland","Sachsen","Sachsen-Anhalt","Schleswig-Holstein","Thüringen","Österreich","Schweiz","keine Angabe"];
 const ORTE = ["Automatisch passend zum Fach","Forschungsinstitut","Museum bei Nacht","Raumstation","U-Boot / Forschungsschiff","Burg / Kloster","Labor","Bibliothek / Archiv","Zeitreisemaschine","Wetterstation in der Arktis","Eigener Vorschlag"];
@@ -316,7 +315,6 @@ const EXTRAS = [["egg","Easter Egg (versteckter Geheimraum)"],["cheat","Lehrkraf
 const ROLLEN = ["Sachtext","Arbeitsblatt","Tabelle/Statistik","Diagramm/Grafik","Karte","Bild/Foto","Quelle","Lösungen (nur für Lehrkraft)","Sonstiges"];
 
 const fill = (sel, arr, val, ask) => { const s = $(sel); s.innerHTML = (ask ? `<option value="">${ask}</option>` : "") + arr.map(v => `<option>${v}</option>`).join(""); s.value = val || ""; };
-$("#fachList").innerHTML = FAECHER.map(v => `<option value="${v}">`).join("");
 fill("#jg", ["1","2","3","4","5","6","7","8","9","10","11","12","13"], "", "bitte wählen");
 fill("#sf", SF, "", "bitte wählen"); fill("#bl", BL, "", "bitte wählen"); fill("#ort", ORTE, ORTE[0]); fill("#finale", FINALE, FINALE[0]);
 const chips = (sel, arr, name, on) => { $(sel).innerHTML = arr.map((v, i) => { const [id, txt] = Array.isArray(v) ? v : [name + i, v]; return `<label class="chip"><input type="checkbox" id="${name}_${id}" data-v="${txt}" ${on(id, i) ? "checked" : ""}>${txt}</label>`; }).join(""); };
